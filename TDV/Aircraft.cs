@@ -4739,7 +4739,7 @@ weapon.firingRange);
 		/// <returns>True if it can roll, false otherwise.</returns>
 		private bool isRollConditions()
 		{
-			return virtualNoseAngle == -90 ^ Math.Abs(bankAngle) == 90;
+			return Math.Abs(virtualNoseAngle) == 90 ^ Math.Abs(bankAngle) == 90;
 		}
 		private void roll()
 		{
