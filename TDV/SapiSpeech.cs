@@ -151,13 +151,13 @@ namespace TDV
 			if (flag == SpeakFlag.interruptableButStop || flag == SpeakFlag.noInterruptButStop) {
 				purge();
 			}
-			sayString = processText(sayString);
+			string sayStringW = processText(sayString);
 			lastSpokenString = sayString;
 			if (source == SpeechSource.auto) {
 				if (initializeJAWS() && sayThroughJAWS(sayString, flag == SpeakFlag.interruptableButStop || flag == SpeakFlag.noInterruptButStop)) {
-					startSpeakTimerOn(sayString);
+					startSpeakTimerOn(sayStringW);
 				} else if (((Environment.Is64BitProcess) ? nvdaController64_speakText(sayString) : nvdaController_speakText(sayString)) == 0) {
-					startSpeakTimerOn(sayString);
+					startSpeakTimerOn(sayStringW);
 				}
 			} else {
 				// if we got down here, none of the other screen readers are loaded or source is SAPI
