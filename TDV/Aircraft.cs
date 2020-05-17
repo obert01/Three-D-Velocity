@@ -756,7 +756,18 @@ namespace TDV
 					&& (!isInTurn))
 					isInTurn = true;
 			}
-			engine.setFrequency(freqInterval());
+			// Let's try pitching down the sound of AI aircrafts that are behind the player, so to better distinguish them from those being ahead
+			if (isAI)
+			{
+				Aircraft p = (Aircraft)Interaction.objectAt(Mission.player.id);
+				RelativePosition rp = p.getPosition(this);
+				if (rp.isBehind)
+					engine.setFrequency(freqInterval() - 12f);
+				else
+					engine.setFrequency(freqInterval());
+			}
+			else
+				engine.setFrequency(freqInterval());
 
 			throttle();
 			if (!isStallCondition()) {
